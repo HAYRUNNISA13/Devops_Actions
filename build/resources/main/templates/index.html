@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Online shopping Site</title>
+    <link rel="stylesheet" type="text/css" th:href="@{/webjars/bootstrap/css/bootstrap.min.css}">
+    <link rel="stylesheet" type="text/css" href="styles.css">
+
+    <style>
+
+        body {
+            background-image: url('/onlineshopping2.jpeg');
+            background-size: cover;
+        }
+        .container-fluid
+        {
+            color: darkred;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container-fluid text-center">
+    <h1>Welcome to the Online Shopping Mall </h1>
+    <br>
+    <br>
+    <div><a class ="h2 " th:href="@{/Customer}"> Customer</a></div>
+    <div> <a class ="h2 " th:href="@{/Product}"> Product</a></div>
+    <div><a class="h2" th:href="@{/orders}"> Order</a></div>
+
+
+
+
+
+</div>
+</body>
+</html>
