@@ -41,7 +41,7 @@ jobs:
           aws-region: us-east-1
 
       - name: Upload JAR to S3
-        run: aws s3 cp build/libs/*.jar s3:devops13-hayrunnisacelik
+        run: aws s3 cp build/libs/*.jar s3://devops13-hayrunnisacelik/
 
       # 5. Docker işlemleri
       - name: Login to DockerHub
