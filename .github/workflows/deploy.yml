@@ -32,7 +32,7 @@ jobs:
       - name: Build with Gradle
         run: ./gradlew build
 
-      # 4. AWS S3'e JAR yükleme
+      # 4. AWS S3'e JAR yükleme - GÜNCELLENMİŞ KISIM
       - name: Configure AWS Credentials
         uses: aws-actions/configure-aws-credentials@v4
         with:
@@ -40,8 +40,21 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: us-east-1
 
+      - name: Debug JAR files
+        run: |
+          echo "JAR dosyaları kontrolü:"
+          ls -la build/libs/
+          [ -f build/libs/*.jar ] || echo "HATA: JAR dosyası bulunamadı"
+
       - name: Upload JAR to S3
-        run: aws s3 cp build/libs/*.jar s3://devops13-hayrunnisacelik/
+        run: |
+          # Önce bucket'ın erişilebilir olduğunu kontrol et
+          aws s3 ls s3://devops13-hayrunnisacelik/ || echo "Bucket listeleme hatası"
+          
+          # Spesifik JAR dosyasını bul ve yükle
+          JAR_FILE=$(ls build/libs/*.jar | head -n 1)
+          aws s3 cp "$JAR_FILE" s3://devops13-hayrunnisacelik/
+          echo "$JAR_FILE başarıyla yüklendi"
 
       # 5. Docker işlemleri
       - name: Login to DockerHub
