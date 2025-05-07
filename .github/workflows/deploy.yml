@@ -15,7 +15,7 @@ jobs:
       AWS_USER: ${{ secrets.EC2_USER }}
       PEM_KEY: ${{ secrets.EC2_PEM_KEY_B64 }}
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
+      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
       IMAGE_NAME: hayruncelik692/devopssssss-app
       
     steps:
@@ -38,7 +38,7 @@ jobs:
         scp -o StrictHostKeyChecking=no -i key.pem build/libs/*.jar $AWS_USER@$AWS_HOST:/home/$AWS_USER/app.jar
 
     - name: Log in to Docker Hub
-      run: echo $DOCKER_PASSWORD | docker login -u $DOCKER_USERNAME --password-stdin
+      run: echo $DOCKER_TOKEN | docker login -u $DOCKER_USERNAME --password-stdin
 
     - name: Build Docker Image
       run: docker build -t $IMAGE_NAME .
