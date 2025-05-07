@@ -13,7 +13,7 @@ jobs:
     env:
       AWS_HOST: ${{ secrets.EC2_HOST }}
       AWS_USER: ${{ secrets.EC2_USER }}
-      PEM_KEY: ${{ secrets.EC2_PEM_KEY }}
+      PEM_KEY: ${{ secrets.EC2_PEM_KEY_B64 }}
       DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
       DOCKER_PASSWORD: ${{ secrets.DOCKER_PASSWORD }}
       IMAGE_NAME: hayruncelik692/devopssssss-app
@@ -33,7 +33,7 @@ jobs:
 
     - name: Copy JAR to EC2
       run: |
-        echo "${{ secrets.EC2_PEM_KEY }}" | base64 -d > key.pem
+        echo "${{ secrets.EC2_PEM_KEY_B64 }}" | base64 -d > key.pem
         chmod 600 key.pem
         scp -o StrictHostKeyChecking=no -i key.pem build/libs/*.jar $AWS_USER@$AWS_HOST:/home/$AWS_USER/app.jar
 
