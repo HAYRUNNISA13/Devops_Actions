@@ -14,8 +14,8 @@ jobs:
       AWS_HOST: ${{ secrets.EC2_HOST }}
       AWS_USER: ${{ secrets.EC2_USER }}
       PEM_KEY: ${{ secrets.EC2_PEM_KEY_B64 }}
-      DOCKER_USERNAME: ${{ secrets.DOCKER_USERNAME }}
-      DOCKER_TOKEN: ${{ secrets.DOCKER_TOKEN }}
+      DOCKER_USERNAME: ${{ secrets.DOCKERHUB_USERNAME }}
+      DOCKER_TOKEN: ${{ secrets.DOCKERHUB_TOKEN }}
       IMAGE_NAME: hayruncelik692/devopssssss-app
       
     steps:
